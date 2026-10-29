@@ -1,0 +1,148 @@
+{
+ "schema": "fem-studio/1",
+ "name": "L-shape",
+ "description": "",
+ "units": "si",
+ "physics": "heat2d",
+ "analysis": {
+  "type": "static",
+  "nModes": 6,
+  "massType": "consistent",
+  "dt": 1,
+  "nSteps": 60,
+  "theta": 1,
+  "T0": 20
+ },
+ "options": {
+  "thickness": 1
+ },
+ "geometry": {
+  "mode": "shapes",
+  "shapes": [
+   {
+    "id": "plate",
+    "name": "plate",
+    "type": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 2,
+    "h": 2,
+    "op": "add",
+    "material": 0
+   },
+   {
+    "id": "cut",
+    "name": "cut",
+    "type": "rect",
+    "x": 1,
+    "y": 1,
+    "w": 1,
+    "h": 1,
+    "op": "sub",
+    "material": 0
+   }
+  ],
+  "manual": {
+   "nodes": [],
+   "elems": []
+  },
+  "frame": {
+   "nodes": [],
+   "members": []
+  },
+  "solid": {
+   "kind": "extrude",
+   "depth": 0.1,
+   "layers": 4,
+   "angle": 360,
+   "segments": 32,
+   "box": {
+    "lx": 1,
+    "ly": 0.2,
+    "lz": 0.2
+   }
+  },
+  "image": null,
+  "imported": null
+ },
+ "mesh": {
+  "h": 0.2,
+  "elemType": "T6",
+  "method": "auto",
+  "minAngle": 25,
+  "nx": 20,
+  "ny": 4,
+  "nz": 4,
+  "refinements": [
+   {
+    "kind": "point",
+    "x": 1,
+    "y": 1,
+    "h": 0.01
+   }
+  ],
+  "grading": 0.3,
+  "smooth": true,
+  "subdiv": 1
+ },
+ "materials": [
+  {
+   "name": "Structural steel (S275 / A36)",
+   "E": 200000000000,
+   "nu": 0.3,
+   "rho": 7850,
+   "k": 1,
+   "c": 490,
+   "alpha": 0.000012,
+   "color": "#7c8a99"
+  }
+ ],
+ "sections": [
+  {
+   "name": "IPE 200 (approx.)",
+   "A": 0.00285,
+   "I": 0.00001943,
+   "c": 0.1
+  }
+ ],
+ "conditions": [
+  {
+   "id": "c901",
+   "type": "temperature",
+   "name": "Fixed temperature",
+   "targets": {
+    "labels": [
+     "cut.left",
+     "cut.bottom",
+     "plate.left",
+     "plate.top",
+     "plate.right",
+     "plate.bottom"
+    ]
+   },
+   "values": {
+    "T": 0
+   }
+  },
+  {
+   "id": "c902",
+   "type": "source",
+   "name": "Internal heat generation",
+   "targets": {
+    "all": true
+   },
+   "values": {
+    "Q": 1
+   }
+  }
+ ],
+ "solver": {
+  "method": "auto",
+  "ordering": "nd",
+  "tol": 1e-10
+ },
+ "weakForm": null,
+ "kernelEdits": {},
+ "savedAt": "2026-10-28T15:58:08.048Z",
+ "app": "COEAI FEM Studio"
+}
